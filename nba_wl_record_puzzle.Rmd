@@ -1,0 +1,46 @@
+---
+title: 'The Celtics Only Beat Bad Teams: a puzzle'
+author: "Mara Averick"
+date: "January 11, 2016"
+output: html_document
+---
+> “Boston's loss to Memphis Sunday was yet another defeat against an opponent at .500 or better this season. Overall, Boston has feasted on bad teams, going 13-3 against opponents below .500, versus just 6-15 against teams at .500 or better.” —_ESPN Research Notes (1/10/16)_
+
+These Celtics splits don't sound good, but they also got me wondering about how strong each opponent looked at the time of their respective Celtics matchups. Luckily (or unluckily) for me, we've definitely got the data to figure this type of thing out with the [Stattleship](https://stattleship.com/) API. 
+
+And so, in the spirit of middle-school math class “Problems of the Week,” I present to you a puzzle of sorts: **What was the win/loss percentage for the teams _going into_ the games?**
+
+I know, I know— the answer won't change the outcome, but we're talking about _playing with sports data_ here! Though I'm sure you could easily figure things out on your own using the ever-helpful [Stattleship playbook](http://playbook.stattleship.com/) and [developer docs](http://developers.stattleship.com/), there are hints below if you get stuck, or want an assist getting started. 
+
+**Happy puzzling!**
+
+With side-loaded JSON, you can get all of the team details along with the games [as I've done here](https://gist.github.com/batpigandme/d06f279369546dbfe462), but I like having a data frame of NBA teams kicking around, so let's hit up the teams endpoint.
+
+```
+## install and load the stattleshipR package
+devtools::install_github("stattleship/stattleship-r")  
+library(stattleshipR)
+
+## set API token
+set_token('YOUR_ACCESS_TOKEN')
+
+## set up envt
+options(stringsAsFactors=FALSE)
+
+## set params
+league <- "nba"
+sport <- "basketball"
+ep <- "teams"
+
+## leave empty since we want all
+q_body <- list()
+
+## get the data
+teams <- ss_get_result(sport=sport, league=league, ep=ep, query=q_body, version=1, verbose=TRUE, walk=TRUE)
+
+## bind together data
+tms <- lapply(teams, function(x) x$teams)
+nba_teams <- do.call('rbind', tms)
+```
+
+There are a few ways to go from here, depending on which bits of information you'd like to have with your data. For just `the games`, this [gist](https://gist.github.com/batpigandme/ecc27e1176a91c2f5f71) can help you out. If you want to go in a `team game logs` kind of direction, here's [the code](https://gist.github.com/batpigandme/d06f279369546dbfe462) I might use. Or just go it alone.
