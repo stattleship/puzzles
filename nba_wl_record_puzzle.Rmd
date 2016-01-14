@@ -4,7 +4,7 @@ author: "Mara Averick"
 date: "January 11, 2016"
 output: html_document
 ---
-> “Boston's loss to Memphis Sunday was yet another defeat against an opponent at .500 or better this season. Overall, Boston has feasted on bad teams, going 13-3 against opponents below .500, versus just 6-15 against teams at .500 or better.” —_ESPN Research Notes (1/10/16)_
+> “Boston's loss to Memphis Sunday was yet another defeat against an opponent at .500 or better this season. Overall, Boston has feasted on bad teams, going 13-3 against opponents below .500, versus just 6-15 against teams at .500 or better.” —_ESPN Research Notes_
 
 These Celtics splits don't sound good, but they also got me wondering about how strong each opponent looked at the time of their respective Celtics matchups. Luckily (or unluckily) for me, we've definitely got the data to figure this type of thing out with the [Stattleship](https://stattleship.com/) API. 
 
